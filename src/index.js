@@ -19,6 +19,12 @@ const App = () => {
       .catch(error => console.log(error));
   }, []);
 
+  const updateItem = (id, item) => {
+    axios.put(`http://localhost:3333/items/${id}`, item)
+    .then(response => console.log(response))
+    .catch( err => console.log(err));
+  }
+
   return (
     <div className="App">
       <nav>

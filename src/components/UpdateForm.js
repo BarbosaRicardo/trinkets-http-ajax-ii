@@ -16,8 +16,11 @@ const UpdateForm = props => {
   const editingItem = props.items.find(thing => {
     return thing.id === Number(props.match.params.id)
   });
-
-  console.log("THE ITEM!", editingItem)
+  if(editingItem)
+  {
+    setItem(editingItem)
+  }
+ 
 }, [props.items, props.match.params])
 
   const changeHandler = ev => {
@@ -35,6 +38,8 @@ const UpdateForm = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    const id = Number(props.match.params.id)
+    props.updateItem(id, item)
     // make a PUT request to edit the item
   };
 
