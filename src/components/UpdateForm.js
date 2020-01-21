@@ -1,32 +1,31 @@
-import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const initialItem = {
-  name: '',
-  price: '',
-  imageUrl: '',
-  description: '',
-  shipping: ''
+  name: "",
+  price: "",
+  imageUrl: "",
+  description: "",
+  shipping: ""
 };
 
 const UpdateForm = props => {
   const [item, setItem] = useState(initialItem);
-  useEffect( () => {
 
-  const editingItem = props.items.find(thing => {
-    return thing.id === Number(props.match.params.id)
-  });
-  if(editingItem)
-  {
-    setItem(editingItem)
-  }
- 
-}, [props.items, props.match.params])
+  useEffect(() => {
+    const editingItem = props.items.find(thing => {
+      return thing.id === Number(props.match.params.id);
+    });
+
+    if (editingItem) {
+      setItem(editingItem);
+    }
+  }, [props.items, props.match.params]);
 
   const changeHandler = ev => {
     ev.persist();
     let value = ev.target.value;
-    if (ev.target.name === 'price') {
+    if (ev.target.name === "price") {
       value = parseInt(value, 10);
     }
 
@@ -38,8 +37,8 @@ const UpdateForm = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const id = Number(props.match.params.id)
-    props.updateItem(id, item)
+    const id = Number(props.match.params.id);
+    props.updateItem(id, item);
     // make a PUT request to edit the item
   };
 
