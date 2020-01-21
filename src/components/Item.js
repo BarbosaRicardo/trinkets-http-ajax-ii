@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, NavLink } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 
 import ItemDescription from './ItemDescription';
 import ItemShipping from './ItemShipping';
@@ -12,6 +12,12 @@ function Item(props) {
 
   if (!props.items.length || !item) {
     return <h2>Loading item data...</h2>;
+  }
+
+  const routeToUpdate = (e) => {
+    e.preventDefault();
+    console.log(props)
+    props.history.push(`/edit-item/${item.id}`)
   }
 
   return (
@@ -40,7 +46,7 @@ function Item(props) {
         path="/item-list/:id/shipping"
         render={props => <ItemShipping {...props} item={item} />}
       />
-      <button className="md-button">Edit</button>
+      <button className="md-button" onClick={routeToUpdate}>Edit</button>
       <button className="md-button">Delete</button>
     </div>
   );

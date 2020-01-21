@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 
 const initialItem = {
   name: '',
@@ -11,6 +11,14 @@ const initialItem = {
 
 const UpdateForm = props => {
   const [item, setItem] = useState(initialItem);
+  useEffect( () => {
+
+  const editingItem = props.items.find(thing => {
+    return thing.id === Number(props.match.params.id)
+  });
+
+  console.log("THE ITEM!", editingItem)
+}, [props.items, props.match.params])
 
   const changeHandler = ev => {
     ev.persist();
@@ -38,7 +46,7 @@ const UpdateForm = props => {
           type="text"
           name="name"
           onChange={changeHandler}
-          placeholder="name"
+          placeholder="Name"
           value={item.name}
         />
         <div className="baseline" />
